@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_app_task/constants.dart';
 import 'package:todo_app_task/task_cubit/task_cubit.dart';
+import 'package:todo_app_task/widgets/custom_button.dart';
 
 class AddTaskView extends StatefulWidget {
   const AddTaskView({super.key});
@@ -18,6 +19,12 @@ class _AddTaskViewState extends State<AddTaskView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: kPrimaryColor,
+        title: const Text('Add Task',style: TextStyle(color: Colors.white),),
+        centerTitle: true,
+      ),
       body: Padding(
         padding: const EdgeInsets.only(top: 80, left: 16.0, right: 16.0),
         child: Column(
@@ -62,25 +69,17 @@ class _AddTaskViewState extends State<AddTaskView> {
             const SizedBox(
               height: 30,
             ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: kPrimaryColor,
-                minimumSize: const Size(double.infinity, 50),
-              ),
-              onPressed: () {
-                if (addTaskController.text.isNotEmpty) {
-                  context.read<TaskCubit>().addTask(
-                        addTaskController.text,
-                        selectedCategory,
-                      );
-                  Navigator.pop(context); // Go back to HomeView
-                }
-              },
-              child: const Text(
-                'Add',
-                style: TextStyle(color: Colors.white, fontSize: 20),
-              ),
-            )
+            CustomButton(
+                onPressed: () {
+                  if (addTaskController.text.isNotEmpty) {
+                    context.read<TaskCubit>().addTask(
+                          addTaskController.text,
+                          selectedCategory,
+                        );
+                    Navigator.pop(context); // Go back to HomeView
+                  }
+                },
+                buttonText: 'Add'),
           ],
         ),
       ),

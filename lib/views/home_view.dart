@@ -25,6 +25,7 @@ class HomeView extends StatelessWidget {
         ),
       ),
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         centerTitle: true,
         backgroundColor: kPrimaryColor,
         title: const Text(
