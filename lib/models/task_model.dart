@@ -3,5 +3,6 @@ class TaskModel {
   String category;
   bool isCompleted;
 
-  TaskModel({required this.title, required this.category, this.isCompleted = false});
+  TaskModel(
+      {required this.title, required this.category, this.isCompleted = false});
 }

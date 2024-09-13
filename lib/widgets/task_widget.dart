@@ -17,8 +17,8 @@ class TaskWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedOpacity(
-      opacity: task.isCompleted ? 0.5 : 1.0, 
-      duration: const Duration(milliseconds: 300), 
+      opacity: task.isCompleted ? 0.5 : 1.0,
+      duration: const Duration(milliseconds: 300),
       child: Container(
         decoration: BoxDecoration(
           border: Border.all(color: kPrimaryColor),

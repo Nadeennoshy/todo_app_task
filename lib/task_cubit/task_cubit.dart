@@ -22,11 +22,13 @@ class TaskCubit extends Cubit<TaskState> {
 
     if (tasksJson != null) {
       List<dynamic> jsonList = json.decode(tasksJson);
-      tasks = jsonList.map((json) => TaskModel(
-        title: json['title'],
-        isCompleted: json['isCompleted'],
-        category: json['category'],
-      )).toList();
+      tasks = jsonList
+          .map((json) => TaskModel(
+                title: json['title'],
+                isCompleted: json['isCompleted'],
+                category: json['category'],
+              ))
+          .toList();
     }
 
     allTasks = tasks; // Store all tasks
@@ -46,7 +48,6 @@ class TaskCubit extends Cubit<TaskState> {
 
     emit(TaskSuccessState(filteredTasks));
   }
-
 
   Future<void> saveTasks() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();

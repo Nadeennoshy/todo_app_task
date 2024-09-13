@@ -22,7 +22,10 @@ class _AddTaskViewState extends State<AddTaskView> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: kPrimaryColor,
-        title: const Text('Add Task',style: TextStyle(color: Colors.white),),
+        title: const Text(
+          'Add Task',
+          style: TextStyle(color: Colors.white),
+        ),
         centerTitle: true,
       ),
       body: Padding(

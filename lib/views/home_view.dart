@@ -32,7 +32,7 @@ class HomeView extends StatelessWidget {
           'Todo List',
           style: TextStyle(color: Colors.white),
         ),
-         actions: [
+        actions: [
           PopupMenuButton<TaskFilter>(
             onSelected: (filter) {
               context.read<TaskCubit>().filterTasks(filter);
@@ -53,7 +53,8 @@ class HomeView extends StatelessWidget {
                 ),
               ];
             },
-            icon: const Icon(Icons.filter_list, color: Colors.white), // Change icon color
+            icon: const Icon(Icons.filter_list,
+                color: Colors.white), // Change icon color
             color: Colors.white,
           ),
         ],
@@ -72,7 +73,8 @@ class HomeView extends StatelessWidget {
                     const SizedBox(height: 20),
                     const Text(
                       'No tasks available',
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
@@ -82,7 +84,8 @@ class HomeView extends StatelessWidget {
               itemCount: state.tasks.length,
               itemBuilder: (context, index) {
                 return Dismissible(
-                  key: Key(state.tasks[index].title), // Unique key for each task
+                  key:
+                      Key(state.tasks[index].title), // Unique key for each task
                   background: Container(
                     color: Colors.red,
                     alignment: Alignment.centerRight,
