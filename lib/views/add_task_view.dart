@@ -42,15 +42,19 @@ class _AddTaskViewState extends State<AddTaskView> {
             ),
             DropdownButton<String>(
               value: selectedCategory,
-              items: <String>['Personal', 'Work']
-                  .map<DropdownMenuItem<String>>((String value) {
+              items: <String>[
+                'Personal',
+                'Work',
+                'Shopping',
+                'Health',
+              ].map<DropdownMenuItem<String>>((String value) {
                 return DropdownMenuItem<String>(
                   value: value,
                   child: Text(value),
                 );
               }).toList(),
               onChanged: (String? newValue) {
-                 setState(() {
+                setState(() {
                   selectedCategory = newValue!;
                 });
               },
@@ -66,9 +70,9 @@ class _AddTaskViewState extends State<AddTaskView> {
               onPressed: () {
                 if (addTaskController.text.isNotEmpty) {
                   context.read<TaskCubit>().addTask(
-                    addTaskController.text,
-                    selectedCategory,
-                  );
+                        addTaskController.text,
+                        selectedCategory,
+                      );
                   Navigator.pop(context); // Go back to HomeView
                 }
               },
