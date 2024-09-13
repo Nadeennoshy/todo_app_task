@@ -31,7 +31,7 @@ class HomeView extends StatelessWidget {
           'Todo List',
           style: TextStyle(color: Colors.white),
         ),
-          actions: [
+         actions: [
           PopupMenuButton<TaskFilter>(
             onSelected: (filter) {
               context.read<TaskCubit>().filterTasks(filter);
@@ -63,12 +63,11 @@ class HomeView extends StatelessWidget {
             return const Center(child: CircularProgressIndicator());
           } else if (state is TaskSuccessState) {
             if (state.tasks.isEmpty) {
-              // Show image when there are no tasks
               return Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Image.asset('assets/images/note.png', height: 200), // Adjust height as needed
+                    Image.asset('assets/images/note.png', height: 200),
                     const SizedBox(height: 20),
                     const Text(
                       'No tasks available',
@@ -81,16 +80,36 @@ class HomeView extends StatelessWidget {
             return ListView.builder(
               itemCount: state.tasks.length,
               itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TaskWidget(
-                    task: state.tasks[index],
-                    onDelete: () {
-                      context.read<TaskCubit>().deleteTask(index);
-                    },
-                    onToggleCompletion: () {
-                      context.read<TaskCubit>().toggleTaskCompletion(index);
-                    },
+                return Dismissible(
+                  key: Key(state.tasks[index].title), // Unique key for each task
+                  background: Container(
+                    color: Colors.red,
+                    alignment: Alignment.centerRight,
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: const Icon(
+                      Icons.delete,
+                      color: Colors.white,
+                    ),
+                  ),
+                  onDismissed: (direction) {
+                    context.read<TaskCubit>().deleteTask(index);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('${state.tasks[index].title} deleted'),
+                      ),
+                    );
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TaskWidget(
+                      task: state.tasks[index],
+                      onDelete: () {
+                        context.read<TaskCubit>().deleteTask(index);
+                      },
+                      onToggleCompletion: () {
+                        context.read<TaskCubit>().toggleTaskCompletion(index);
+                      },
+                    ),
                   ),
                 );
               },
