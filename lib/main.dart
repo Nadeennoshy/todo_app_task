@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app_task/task_cubit/task_cubit.dart';
 import 'package:todo_app_task/views/home_view.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
   runApp(const TodoApp());
@@ -10,9 +12,12 @@ class TodoApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: HomeView(),
+    return BlocProvider(
+      create: (context) => TaskCubit(),
+      child: const MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: HomeView(),
+      ),
     );
   }
 }
